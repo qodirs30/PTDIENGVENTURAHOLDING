@@ -9,13 +9,19 @@ export const Hero: React.FC = () => {
     <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-primary border-b border-border-hairline">
       {/* Premium ambient light background (Atmosphere-Background style) */}
       <div className="absolute inset-0 z-0">
+        {/* Real photo background with green/dark overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 mix-blend-luminosity"
+          style={{ backgroundImage: `url(${siteConfig.images.heroBg})` }}
+        />
+        
         {/* Soft green/emerald light blobs drifting slowly */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-forest-green/20 blur-[130px] rounded-full animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-forest-glow/10 blur-[150px] rounded-full animate-float" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-forest-green/25 blur-[130px] rounded-full animate-pulse-slow pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-forest-glow/15 blur-[150px] rounded-full animate-float pointer-events-none" />
         
         {/* Soft dithered layout feel / background pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0a0f0d_95%)]" />
-        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0a0f0d_95%)] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
       </div>
 
       {/* Guide lines & L-shape brackets (Framed-Grid-Layout style) */}

@@ -35,10 +35,12 @@ export const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center space-x-2 group">
-          <div className="w-8 h-8 rounded-sm bg-gradient-to-tr from-forest-light to-accent-gold flex items-center justify-center font-display font-bold text-primary text-lg">
-            D
-          </div>
+        <a href="#" className="flex items-center space-x-3 group">
+          <img
+            src="/images/logo.png"
+            alt="PT Dieng Ventura Holdings"
+            className="h-8 w-auto object-contain"
+          />
           <span className="font-display font-bold tracking-widest text-sm text-off-white group-hover:text-accent-gold transition-colors duration-300">
             DIENG VENTURA
           </span>

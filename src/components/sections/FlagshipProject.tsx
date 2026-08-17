@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
+import { siteConfig } from "@/data/site";
 import { Tree, Barbell, Users, GraduationCap, ShieldCheck } from "@phosphor-icons/react";
 
 const pillars = [
@@ -80,9 +81,15 @@ export const FlagshipProject: React.FC = () => {
 
           {/* Right: High-Impact Visual / Schematic Mock (WebGL/Abstract feel) */}
           <div className="lg:col-span-5">
-            <Card variant="glass" showCorners={true} className="relative h-96 flex flex-col justify-between border-accent-gold/20">
+            <Card variant="glass" showCorners={true} className="relative h-96 flex flex-col justify-between border-accent-gold/20 overflow-hidden">
+              {/* Background forest photo */}
+              <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-luminosity"
+                style={{ backgroundImage: `url(${siteConfig.images.forestBg})` }}
+              />
+              
               {/* Background gradient grid for sci-fi/WebGL technical aesthetic */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,61,40,0.15)_0%,transparent_70%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,61,40,0.2)_0%,transparent_90%)]" />
               <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:16px_16px]" />
               
               {/* Top corner badge */}

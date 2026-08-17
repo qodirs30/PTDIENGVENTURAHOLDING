@@ -13,10 +13,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand block */}
           <div className="md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-6 h-6 rounded-sm bg-gradient-to-tr from-forest-light to-accent-gold flex items-center justify-center font-display font-bold text-primary text-xs">
-                D
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img
+                src="/images/logo.png"
+                alt="PT Dieng Ventura Holdings"
+                className="h-6 w-auto object-contain"
+              />
               <span className="font-display font-bold tracking-widest text-xs text-off-white">
                 DIENG VENTURA
               </span>
