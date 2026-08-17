@@ -4,16 +4,22 @@ import React, { useState } from "react";
 import { Card } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { Lock, FilePdf, EyeClosed } from "@phosphor-icons/react";
+import { translations } from "@/data/translations";
 
-export const DataRoom: React.FC = () => {
+interface DataRoomProps {
+  lang: "id" | "en";
+}
+
+export const DataRoom: React.FC<DataRoomProps> = ({ lang }) => {
   const [passcode, setPasscode] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = translations[lang].dataRoom;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!passcode.trim()) {
-      setError("Please enter a passcode.");
+      setError(t.errorEmpty);
       return;
     }
     
@@ -23,17 +29,9 @@ export const DataRoom: React.FC = () => {
     // Mock validation logic
     setTimeout(() => {
       setIsSubmitting(false);
-      setError("Invalid passcode credentials. Please contact the investment manager to receive a secure access key.");
+      setError(t.errorInvalid);
     }, 1200);
   };
-
-  const documents = [
-    "Holding Company Charter & Corporate Articles",
-    "Land Licensing & Forestry Permits (KFP Zone)",
-    "Audited Valuation Matrix & Financial Forecasts",
-    "Investor Term Sheet Draft (Series A)",
-    "Community Collaboration MoU & Social Impact Records"
-  ];
 
   return (
     <section id="data-room" className="py-24 bg-primary relative border-b border-border-hairline overflow-hidden">
@@ -45,21 +43,21 @@ export const DataRoom: React.FC = () => {
           {/* Left info column */}
           <div className="lg:col-span-7">
             <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-              Due Diligence
+              {t.tag}
             </div>
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-6">
-              Investor Data Room
+              {t.title}
             </h2>
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed mb-8 font-body">
-              For security and compliance reasons, all due-diligence materials, land deeds, environmental reports, and cap tables are hosted in a secure data room. Authorized institutional investors can request credentials below.
+              {t.subtitle}
             </p>
 
             {/* List of documents inside */}
             <div className="space-y-4">
               <h4 className="font-display font-semibold text-xs text-off-white uppercase tracking-wider mb-2">
-                Available Documentation:
+                {t.docsTitle}
               </h4>
-              {documents.map((doc, idx) => (
+              {t.docsList.map((doc, idx) => (
                 <div key={idx} className="flex items-center space-x-3 text-xs text-text-muted">
                   <FilePdf size={18} className="text-accent-gold/75 shrink-0" />
                   <span>{doc}</span>
@@ -77,17 +75,17 @@ export const DataRoom: React.FC = () => {
                 </div>
                 
                 <h3 className="font-display font-bold text-base text-off-white uppercase tracking-wider mb-1">
-                  Secure Access Required
+                  {t.gateTitle}
                 </h3>
                 <p className="text-[10px] text-text-muted mb-6 max-w-xs font-body">
-                  Please enter your passcode to view the documents.
+                  {t.gateDesc}
                 </p>
 
                 <form onSubmit={handleSubmit} className="w-full space-y-4">
                   <div className="relative">
                     <input
                       type="password"
-                      placeholder="Enter Access Key..."
+                      placeholder={t.placeholder}
                       value={passcode}
                       onChange={(e) => setPasscode(e.target.value)}
                       className="w-full px-4 py-3 bg-surface-overlay/80 border border-border-hairline text-off-white text-xs rounded focus:outline-none focus:border-accent-gold transition-colors duration-300 font-body placeholder:text-text-muted/50"
@@ -106,12 +104,12 @@ export const DataRoom: React.FC = () => {
                     className="w-full"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Verifying..." : "Access Data Room"}
+                    {isSubmitting ? (lang === "id" ? "Memverifikasi..." : "Verifying...") : t.btnAccess}
                   </Button>
                 </form>
 
                 <div className="mt-6 pt-4 border-t border-border-hairline/60 w-full flex flex-col items-center">
-                  <span className="text-[9px] text-text-muted uppercase tracking-wider mb-2">No Credentials?</span>
+                  <span className="text-[9px] text-text-muted uppercase tracking-wider mb-2">{t.noCredentials}</span>
                   <button
                     onClick={() => {
                       const el = document.getElementById("contact");
@@ -119,7 +117,7 @@ export const DataRoom: React.FC = () => {
                     }}
                     className="text-[10px] text-accent-gold hover:text-accent-gold-hover transition-colors font-semibold uppercase tracking-wider cursor-pointer"
                   >
-                    Request Credentials Now
+                    {t.btnRequest}
                   </button>
                 </div>
               </div>

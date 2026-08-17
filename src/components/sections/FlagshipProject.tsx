@@ -4,55 +4,77 @@ import React from "react";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 import { siteConfig } from "@/data/site";
+import { translations } from "@/data/translations";
 import { Tree, Barbell, Users, GraduationCap, ShieldCheck } from "@phosphor-icons/react";
 
-const pillars = [
-  { name: "Nature", icon: <Tree size={16} />, desc: "Preserving high-altitude volcanic forest ecology and rich endemic biodiversity." },
-  { name: "Adventure", icon: <Barbell size={16} />, desc: "Low-impact physical exploration, sky canopy walks, and mountain trails." },
-  { name: "Family", icon: <Users size={16} />, desc: "Multi-generational premium camping and shared wilderness activities." },
-  { name: "Education", icon: <GraduationCap size={16} />, desc: "Structured Sekolah Alam curriculum and outdoor environmental workshops." },
-  { name: "Conservation", icon: <ShieldCheck size={16} />, desc: "Reforestation projects, wildlife monitoring, and community inclusive protection." },
-];
+interface FlagshipProjectProps {
+  lang: "id" | "en";
+}
 
-export const FlagshipProject: React.FC = () => {
+const getPillarIcon = (name: string) => {
+  switch (name.toLowerCase()) {
+    case "nature":
+    case "alam":
+      return <Tree size={16} />;
+    case "adventure":
+    case "petualangan":
+      return <Barbell size={16} />;
+    case "family":
+    case "keluarga":
+      return <Users size={16} />;
+    case "education":
+    case "pendidikan":
+      return <GraduationCap size={16} />;
+    case "conservation":
+    case "konservasi":
+    default:
+      return <ShieldCheck size={16} />;
+  }
+};
+
+export const FlagshipProject: React.FC<FlagshipProjectProps> = ({ lang }) => {
+  const t = translations[lang].flagship;
+
   return (
     <section id="flagship" className="py-24 bg-primary relative border-b border-border-hairline overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-forest-green/10 blur-[150px] rounded-full pointer-events-none" />
+      {/* Decorative side text block */}
+      <div className="absolute top-1/2 right-4 -translate-y-1/2 rotate-90 origin-bottom-right opacity-[0.02] font-display font-black text-7xl text-off-white tracking-widest pointer-events-none uppercase hidden xl:block">
+        FLAGSHIP DEVEL
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-            Flagship Project
+            {t.tag}
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-4">
-            Karangsari Forest Park
+            {t.title}
           </h2>
           <p className="text-sm text-text-muted">
-            Our premier ecotourism asset developing sustainable infrastructure inside Dieng&apos;s pristine volcanic highlands.
+            {t.subtitle}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left: Project Narrative & Pillars */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            <span className="text-[10px] text-accent-gold font-display font-semibold uppercase tracking-wider block mb-2">
-              Destination Overview
+          {/* Left: Project Description & Value Props */}
+          <div className="lg:col-span-7">
+            <span className="text-[10px] text-accent-gold font-display font-semibold uppercase tracking-wider block mb-1">
+              {t.overview}
             </span>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-off-white mb-6">
-              A Nature-Based Ecosystem Built for Preservation and Experience
+            <h3 className="font-display font-bold text-2xl sm:text-3xl text-off-white mb-6 leading-tight">
+              {t.mainTitle}
             </h3>
             
-            <p className="text-xs sm:text-sm text-text-muted leading-relaxed mb-8 font-body">
-              Karangsari Forest Park is a thoughtfully designed flagship destination built around forest immersion, family-focused camping, and agroforestry. It offers controlled nature adventures, highland F&B units, and conservation facilities, all built on a low-impact architecture that protects the forest ecosystem.
+            <p className="text-xs text-text-muted leading-relaxed mb-8 font-body">
+              {t.desc}
             </p>
 
-            {/* Pillars */}
+            {/* Project Pillars Grid */}
             <div className="space-y-4 mb-8">
-              {pillars.map((pillar) => (
+              {t.pillars.map((pillar) => (
                 <div key={pillar.name} className="flex items-start space-x-3">
                   <div className="p-1.5 rounded bg-surface-card border border-border-hairline text-accent-gold mt-0.5">
-                    {pillar.icon}
+                    {getPillarIcon(pillar.name)}
                   </div>
                   <div>
                     <h4 className="font-display font-semibold text-xs text-off-white uppercase tracking-wider">
@@ -74,7 +96,7 @@ export const FlagshipProject: React.FC = () => {
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Request Project Details
+                {t.cta}
               </Button>
             </div>
           </div>
@@ -95,10 +117,10 @@ export const FlagshipProject: React.FC = () => {
               {/* Top corner badge */}
               <div className="relative z-10 flex items-center justify-between">
                 <span className="text-[9px] font-display font-bold uppercase tracking-widest text-accent-gold">
-                  Asset ID: KFP-01
+                  {t.assetId}: KFP-01
                 </span>
                 <span className="text-[9px] px-2 py-0.5 rounded bg-forest-green/30 border border-forest-light/40 text-accent-gold font-semibold uppercase">
-                  Licensing Verified
+                  {t.verified}
                 </span>
               </div>
 
@@ -111,18 +133,22 @@ export const FlagshipProject: React.FC = () => {
                 </div>
                 
                 <h4 className="font-display font-semibold text-sm text-off-white uppercase tracking-wider mb-2">
-                  Flagship Development Staging
+                  {t.stagingTitle}
                 </h4>
                 
                 <p className="text-[10px] text-text-muted max-w-xs leading-relaxed">
-                  Licensing and master designs completed. Site planning utilizes zero-emission architecture and local building materials.
+                  {t.stagingDesc}
                 </p>
               </div>
 
-              {/* Bottom detail row */}
-              <div className="relative z-10 flex items-center justify-between border-t border-border-hairline/60 pt-4 text-[9px] text-text-muted uppercase tracking-wider">
-                <span>Location: Dieng, Central Java</span>
-                <span>Elevation: ~2,000m ASL</span>
+              {/* Lower info strip */}
+              <div className="relative z-10 flex items-center justify-between border-t border-border-hairline pt-3 mt-auto">
+                <span className="text-[9px] text-text-muted">
+                  {t.location}
+                </span>
+                <span className="text-[9px] text-text-muted">
+                  {t.elevation}
+                </span>
               </div>
             </Card>
           </div>

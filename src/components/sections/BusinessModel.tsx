@@ -2,48 +2,25 @@
 
 import React from "react";
 import { Card } from "../ui/Card";
+import { translations } from "@/data/translations";
 import { Ticket, House, ForkKnife, Calendar, ShoppingBag, DeviceMobile, Plus } from "@phosphor-icons/react";
 
-const streams = [
-  {
-    title: "Experience Stays",
-    icon: <Ticket size={24} />,
-    desc: "Canopy walks, night safaris, guided ecological trails, and bird watching admissions.",
-    synergy: "Feeds customer traffic directly to F&B and retail."
-  },
-  {
-    title: "Premium Accommodation",
-    icon: <House size={24} />,
-    desc: "Family glamping packages, raw wilderness campsite rentals, and high-altitude shelters.",
-    synergy: "Retains visitors for multiple days, increasing average basket spend."
-  },
-  {
-    title: "Highland F&B Stalls",
-    icon: <ForkKnife size={24} />,
-    desc: "Traditional family dining and specialty highland coffee & tea shops (Kedai Kopi & Teh Pegunungan).",
-    synergy: "Uses local agricultural produce to secure high gross margins."
-  },
-  {
-    title: "Corporate & Private Events",
-    icon: <Calendar size={24} />,
-    desc: "Wilderness retreats, corporate team building, nature weddings, and eco-festivals.",
-    synergy: "Unlocks high-volume group bookings during off-peak seasons."
-  },
-  {
-    title: "Agroforestry & Retail Products",
-    icon: <ShoppingBag size={24} />,
-    desc: "Highland berries, honey, volcanic teas, and packaged local craft distributions.",
-    synergy: "Expands the brand footprint beyond physical locations."
-  },
-  {
-    title: "Unified Digital Platform",
-    icon: <DeviceMobile size={24} />,
-    desc: "Direct-to-consumer online ticketing, lodging bookings, guides reservation, and community market integration.",
-    synergy: "Bypasses third-party booking fees and owns visitor data."
-  }
+interface BusinessModelProps {
+  lang: "id" | "en";
+}
+
+const icons = [
+  <Ticket key="1" size={24} />,
+  <House key="2" size={24} />,
+  <ForkKnife key="3" size={24} />,
+  <Calendar key="4" size={24} />,
+  <ShoppingBag key="5" size={24} />,
+  <DeviceMobile key="6" size={24} />
 ];
 
-export const BusinessModel: React.FC = () => {
+export const BusinessModel: React.FC<BusinessModelProps> = ({ lang }) => {
+  const t = translations[lang].business;
+
   return (
     <section className="py-24 bg-primary relative border-b border-border-hairline overflow-hidden">
       {/* Decorative vertical lines */}
@@ -53,19 +30,19 @@ export const BusinessModel: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-            Revenue Architecture
+            {t.tag}
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-4">
-            How the Ecosystem Monetizes
+            {t.title}
           </h2>
           <p className="text-sm text-text-muted">
-            Diversifying capital inflows by linking experiences, hospitality, dining, events, and commerce into a single ecosystem.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Revenue Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {streams.map((stream) => (
+          {t.streams.map((stream, index) => (
             <Card
               key={stream.title}
               variant="interactive"
@@ -75,7 +52,7 @@ export const BusinessModel: React.FC = () => {
               <div>
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="p-2 rounded bg-surface-overlay border border-border-hairline text-accent-gold">
-                    {stream.icon}
+                    {icons[index % icons.length]}
                   </div>
                   <h3 className="font-display font-semibold text-sm text-off-white">
                     {stream.title}
@@ -87,7 +64,7 @@ export const BusinessModel: React.FC = () => {
               </div>
 
               <div className="p-3 rounded bg-forest-green/10 border border-forest-light/20 text-[10px] text-off-white/80">
-                <span className="font-semibold text-accent-gold">Ecosystem Synergy:</span> {stream.synergy}
+                <span className="font-semibold text-accent-gold">{t.synergy}:</span> {stream.synergy}
               </div>
             </Card>
           ))}
@@ -101,10 +78,10 @@ export const BusinessModel: React.FC = () => {
             </div>
             <div>
               <h4 className="font-display font-semibold text-xs text-off-white uppercase tracking-wider">
-                Future Project-Level Expansion
+                {t.futureTitle}
               </h4>
               <p className="text-[10px] text-text-muted max-w-lg leading-relaxed">
-                As the ecosystem grows, we plan to introduce secondary high-altitude locations, specialized carbon-credit partnerships, and luxury cabin franchises managed under the same holding framework.
+                {t.futureDesc}
               </p>
             </div>
           </div>
@@ -113,9 +90,9 @@ export const BusinessModel: React.FC = () => {
               const el = document.getElementById("contact");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-4 py-2 bg-surface-overlay hover:bg-forest-green/20 text-xs font-display uppercase tracking-widest text-accent-gold border border-border-hairline rounded transition-all cursor-pointer"
+            className="px-4 py-2 bg-surface-overlay hover:bg-forest-green/20 text-xs font-display uppercase tracking-widest text-accent-gold border border-border-hairline rounded transition-all cursor-pointer font-semibold"
           >
-            Review Strategy
+            {t.cta}
           </button>
         </div>
       </div>

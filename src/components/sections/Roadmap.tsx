@@ -1,12 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { roadmap, RoadmapPhase } from "@/data/roadmap";
 import { Card } from "../ui/Card";
+import { translations } from "@/data/translations";
 import { CheckCircle, Circle, PlayCircle } from "@phosphor-icons/react";
 
-export const Roadmap: React.FC = () => {
+interface RoadmapProps {
+  lang: "id" | "en";
+}
+
+export const Roadmap: React.FC<RoadmapProps> = ({ lang }) => {
   const [hoveredPhase, setHoveredPhase] = useState<string | null>(null);
+  const t = translations[lang].roadmap;
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -20,6 +25,18 @@ export const Roadmap: React.FC = () => {
     }
   };
 
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case "completed":
+        return t.completed;
+      case "active":
+        return t.active;
+      case "upcoming":
+      default:
+        return t.upcoming;
+    }
+  };
+
   return (
     <section id="roadmap" className="py-24 bg-primary relative border-b border-border-hairline overflow-hidden">
       {/* Atmosphere corner bloom */}
@@ -28,13 +45,13 @@ export const Roadmap: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-            Growth Strategy
+            {t.tag}
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-4">
-            Development Roadmap
+            {t.title}
           </h2>
           <p className="text-sm text-text-muted">
-            Our multi-year plan outlines the systematic rollout of destinations, digital systems, and economic scaling.
+            {t.subtitle}
           </p>
         </div>
 
@@ -43,7 +60,7 @@ export const Roadmap: React.FC = () => {
           {/* Horizontal connection line */}
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border-hairline -translate-y-1/2 z-0" />
 
-          {roadmap.map((phase: RoadmapPhase) => {
+          {t.phases.map((phase) => {
             const isHovered = hoveredPhase === phase.phase;
             return (
               <div
@@ -80,7 +97,7 @@ export const Roadmap: React.FC = () => {
                       phase.status === "completed" ? "bg-accent-gold/20 text-accent-gold" :
                       phase.status === "active" ? "bg-forest-glow/30 text-accent-gold" : "bg-surface-overlay text-text-muted"
                     }`}>
-                      {phase.status}
+                      {getStatusText(phase.status)}
                     </span>
                   </div>
                   <h3 className="font-display font-bold text-sm text-off-white mb-4">
@@ -102,7 +119,7 @@ export const Roadmap: React.FC = () => {
 
         {/* Mobile timeline vertical track */}
         <div className="lg:hidden relative border-l border-border-hairline pl-8 ml-4 space-y-8">
-          {roadmap.map((phase: RoadmapPhase) => (
+          {t.phases.map((phase) => (
             <div key={phase.phase} className="relative">
               {/* Timeline marker */}
               <div
@@ -122,7 +139,7 @@ export const Roadmap: React.FC = () => {
                     phase.status === "completed" ? "bg-accent-gold/20 text-accent-gold" :
                     phase.status === "active" ? "bg-forest-glow/30 text-accent-gold" : "bg-surface-overlay text-text-muted"
                   }`}>
-                    {phase.status}
+                    {getStatusText(phase.status)}
                   </span>
                 </div>
                 <ul className="space-y-2 text-[10px] text-text-muted leading-relaxed font-body">

@@ -4,8 +4,14 @@ import React, { useState, useEffect } from "react";
 import { List, X } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
 import { siteConfig } from "@/data/site";
+import { translations } from "@/data/translations";
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  lang: "id" | "en";
+  setLang: (lang: "id" | "en") => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -18,11 +24,11 @@ export const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { label: "Vision", href: "#vision" },
-    { label: "Ecosystem", href: siteConfig.links.ecosystem },
-    { label: "Projects", href: siteConfig.links.flagshipProject },
-    { label: "Investment", href: siteConfig.links.investmentThesis },
-    { label: "Data Room", href: siteConfig.links.dataRoomRequest },
+    { label: translations[lang].nav.vision, href: "#vision" },
+    { label: translations[lang].nav.ecosystem, href: siteConfig.links.ecosystem },
+    { label: translations[lang].nav.projects, href: siteConfig.links.flagshipProject },
+    { label: translations[lang].nav.investment, href: siteConfig.links.investmentThesis },
+    { label: translations[lang].nav.dataRoom, href: siteConfig.links.dataRoomRequest },
   ];
 
   return (
@@ -59,8 +65,28 @@ export const Header: React.FC = () => {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:block">
+        {/* Desktop CTA & Language Switcher */}
+        <div className="hidden md:flex items-center space-x-6">
+          {/* Lang Toggle Switcher */}
+          <div className="flex items-center space-x-1 border border-border-hairline/80 rounded p-1 bg-surface-card/60">
+            <button
+              onClick={() => setLang("id")}
+              className={`px-2 py-0.5 text-[9px] font-display font-bold uppercase rounded transition-colors duration-300 cursor-pointer ${
+                lang === "id" ? "bg-accent-gold text-primary" : "text-text-muted hover:text-off-white"
+              }`}
+            >
+              ID
+            </button>
+            <button
+              onClick={() => setLang("en")}
+              className={`px-2 py-0.5 text-[9px] font-display font-bold uppercase rounded transition-colors duration-300 cursor-pointer ${
+                lang === "en" ? "bg-accent-gold text-primary" : "text-text-muted hover:text-off-white"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           <Button
             variant="outline"
             size="sm"
@@ -69,18 +95,40 @@ export const Header: React.FC = () => {
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Inquire Now
+            {translations[lang].nav.inquire}
           </Button>
         </div>
 
         {/* Mobile menu button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-off-white hover:text-accent-gold transition-colors duration-300 cursor-pointer"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <List size={24} />}
-        </button>
+        <div className="flex items-center space-x-4 md:hidden">
+          {/* Mobile Lang Toggle */}
+          <div className="flex items-center space-x-1 border border-border-hairline/80 rounded p-1 bg-surface-card/60">
+            <button
+              onClick={() => setLang("id")}
+              className={`px-2 py-0.5 text-[8px] font-display font-bold uppercase rounded cursor-pointer ${
+                lang === "id" ? "bg-accent-gold text-primary" : "text-text-muted"
+              }`}
+            >
+              ID
+            </button>
+            <button
+              onClick={() => setLang("en")}
+              className={`px-2 py-0.5 text-[8px] font-display font-bold uppercase rounded cursor-pointer ${
+                lang === "en" ? "bg-accent-gold text-primary" : "text-text-muted"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-off-white hover:text-accent-gold transition-colors duration-300 cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <List size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Nav Overlay */}
@@ -112,7 +160,7 @@ export const Header: React.FC = () => {
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Inquire Now
+              {translations[lang].nav.inquire}
             </Button>
             <p className="text-[10px] text-text-muted text-center mt-6">
               PT Dieng Ventura Holdings

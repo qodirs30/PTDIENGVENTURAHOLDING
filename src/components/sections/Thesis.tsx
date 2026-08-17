@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Card } from "../ui/Card";
-import { thesisPoints } from "@/data/site";
+import { translations } from "@/data/translations";
 import { ChartLineUp, ShieldCheck, TreeEvergreen, HardHat, UsersFour, Coins } from "@phosphor-icons/react";
 
 const icons = [
@@ -14,27 +14,33 @@ const icons = [
   <HardHat key="6" size={32} className="text-accent-gold" />,
 ];
 
-export const Thesis: React.FC = () => {
+interface ThesisProps {
+  lang: "id" | "en";
+}
+
+export const Thesis: React.FC<ThesisProps> = ({ lang }) => {
+  const t = translations[lang].thesis;
+
   return (
-    <section id="thesis" className="py-24 bg-primary relative border-b border-border-hairline">
+    <section id="investment-thesis" className="py-24 bg-primary relative border-b border-border-hairline">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-80 h-80 bg-forest-green/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-            Investment Proposition
+            {t.tag}
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-4">
-            Our Investment Thesis
+            {t.title}
           </h2>
           <p className="text-sm text-text-muted">
-            PT Dieng Ventura Holdings operates at the convergence of luxury eco-tourism, strategic destination development, and institutional governance.
+            {t.subtitle}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {thesisPoints.map((point, index) => (
+          {t.points.map((point, index) => (
             <Card
               key={point.title}
               variant="interactive"

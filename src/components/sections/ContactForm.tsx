@@ -5,8 +5,15 @@ import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 import { CheckCircle, Envelope, WhatsappLogo, Info } from "@phosphor-icons/react";
 import { siteConfig } from "@/data/site";
+import { translations } from "@/data/translations";
 
-export const ContactForm: React.FC = () => {
+interface ContactFormProps {
+  lang: "id" | "en";
+}
+
+export const ContactForm: React.FC<ContactFormProps> = ({ lang }) => {
+  const t = translations[lang].contact;
+
   const [formData, setFormData] = useState({
     name: "",
     organization: "",
@@ -24,17 +31,17 @@ export const ContactForm: React.FC = () => {
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required.";
-    if (!formData.organization.trim()) newErrors.organization = "Organization is required.";
+    if (!formData.name.trim()) newErrors.name = t.errorName;
+    if (!formData.organization.trim()) newErrors.organization = t.errorOrg;
     
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required.";
+      newErrors.email = t.errorEmail;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
+      newErrors.email = t.errorEmailInvalid;
     }
 
     if (!formData.consent) {
-      newErrors.consent = "You must consent to data processing.";
+      newErrors.consent = t.errorConsent;
     }
 
     setErrors(newErrors);
@@ -74,13 +81,13 @@ export const ContactForm: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-                Inquiries
+                {t.tag}
               </div>
               <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-6">
-                Start an Investor Conversation
+                {t.title}
               </h2>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed mb-8 font-body">
-                Get in touch with our investment leads. Please fill out the inquiry form, or contact us directly via verified secure channels.
+                {t.subtitle}
               </p>
 
               {/* Direct channels */}
@@ -91,7 +98,7 @@ export const ContactForm: React.FC = () => {
                 >
                   <Envelope size={20} className="text-accent-gold" />
                   <div>
-                    <span className="text-[9px] uppercase tracking-wider text-text-muted block">Email Channel</span>
+                    <span className="text-[9px] uppercase tracking-wider text-text-muted block">{t.channelEmail}</span>
                     <span className="text-xs text-off-white font-medium group-hover:text-accent-gold transition-colors duration-300">
                       {siteConfig.contact.email}
                     </span>
@@ -106,7 +113,7 @@ export const ContactForm: React.FC = () => {
                 >
                   <WhatsappLogo size={20} className="text-accent-gold" />
                   <div>
-                    <span className="text-[9px] uppercase tracking-wider text-text-muted block">Secure WhatsApp</span>
+                    <span className="text-[9px] uppercase tracking-wider text-text-muted block">{t.channelWa}</span>
                     <span className="text-xs text-off-white font-medium group-hover:text-accent-gold transition-colors duration-300">
                       {siteConfig.contact.whatsapp}
                     </span>
@@ -119,7 +126,7 @@ export const ContactForm: React.FC = () => {
             <div className="mt-12 p-4 rounded bg-forest-green/10 border border-forest-light/20 text-[10px] text-text-muted flex items-start space-x-2.5">
               <Info size={18} className="text-accent-gold shrink-0 mt-0.5" />
               <span>
-                <strong>Operational Notice:</strong> Inquiries submitted through the form are parsed in a secure environment. No marketing trackers are active.
+                <strong>{t.noticeTitle}</strong> {t.noticeDesc}
               </span>
             </div>
           </div>
@@ -133,13 +140,13 @@ export const ContactForm: React.FC = () => {
                     <CheckCircle size={40} />
                   </div>
                   <h3 className="font-display font-bold text-xl text-off-white mb-2 uppercase tracking-wide">
-                    Inquiry Transmitted
+                    {t.successTitle}
                   </h3>
                   <p className="text-xs text-text-muted max-w-sm leading-relaxed mb-6 font-body">
-                    Thank you for your interest. An investment manager will review your organization&apos;s credential file and get back to you within 2 business days.
+                    {t.successDesc}
                   </p>
                   <Button variant="outline" size="sm" onClick={() => setStatus("idle")}>
-                    Submit Another Inquiry
+                    {t.btnAnother}
                   </Button>
                 </div>
               ) : (
@@ -157,7 +164,7 @@ export const ContactForm: React.FC = () => {
                     {/* Name */}
                     <div>
                       <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                        Full Name *
+                        {t.labelName}
                       </label>
                       <input
                         type="text"
@@ -172,7 +179,7 @@ export const ContactForm: React.FC = () => {
                     {/* Organization */}
                     <div>
                       <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                        Organization / Fund *
+                        {t.labelOrg}
                       </label>
                       <input
                         type="text"
@@ -189,7 +196,7 @@ export const ContactForm: React.FC = () => {
                     {/* Email */}
                     <div>
                       <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                        Email Address *
+                        {t.labelEmail}
                       </label>
                       <input
                         type="email"
@@ -204,7 +211,7 @@ export const ContactForm: React.FC = () => {
                     {/* Phone (WhatsApp) */}
                     <div>
                       <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                        Phone / WhatsApp (Optional)
+                        {t.labelPhone}
                       </label>
                       <input
                         type="text"
@@ -220,34 +227,34 @@ export const ContactForm: React.FC = () => {
                     {/* Investor Type */}
                     <div>
                       <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                        Investor Profile
+                        {t.labelProfile}
                       </label>
                       <select
                         value={formData.investorType}
                         onChange={(e) => setFormData({ ...formData, investorType: e.target.value })}
                         className="w-full px-4 py-3 bg-surface-overlay/80 border border-border-hairline text-off-white text-xs rounded focus:outline-none focus:border-accent-gold transition-colors duration-300 font-display cursor-pointer"
                       >
-                        <option value="Institutional">Institutional Fund</option>
-                        <option value="Venture Capital">Venture Capital / PE</option>
-                        <option value="HNW">High Net Worth Individual</option>
-                        <option value="Corporate">Corporate / Strategic Partner</option>
+                        <option value="Institutional">{t.profiles.institutional}</option>
+                        <option value="Venture Capital">{t.profiles.vc}</option>
+                        <option value="HNW">{t.profiles.hnw}</option>
+                        <option value="Corporate">{t.profiles.corporate}</option>
                       </select>
                     </div>
 
                     {/* Investment Interest */}
                     <div>
                       <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                        Investment Interest
+                        {t.labelInterest}
                       </label>
                       <select
                         value={formData.interest}
                         onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                         className="w-full px-4 py-3 bg-surface-overlay/80 border border-border-hairline text-off-white text-xs rounded focus:outline-none focus:border-accent-gold transition-colors duration-300 font-display cursor-pointer"
                       >
-                        <option value="Equity">Equity Investment</option>
-                        <option value="Debt">Debt Financing</option>
-                        <option value="Strategic">Strategic Joint Venture</option>
-                        <option value="Project">Project-Level Licensing</option>
+                        <option value="Equity">{t.interests.equity}</option>
+                        <option value="Debt">{t.interests.debt}</option>
+                        <option value="Strategic">{t.interests.strategic}</option>
+                        <option value="Project">{t.interests.project}</option>
                       </select>
                     </div>
                   </div>
@@ -255,14 +262,14 @@ export const ContactForm: React.FC = () => {
                   {/* Message */}
                   <div>
                     <label className="block text-[9px] uppercase tracking-wider font-semibold text-text-muted mb-2">
-                      Inquiry / Message Notes
+                      {t.labelMessage}
                     </label>
                     <textarea
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={4}
                       className="w-full px-4 py-3 bg-surface-overlay/80 border border-border-hairline text-off-white text-xs rounded focus:outline-none focus:border-accent-gold transition-colors duration-300 font-body placeholder:text-text-muted/40"
-                      placeholder="Detail your inquiry expectations..."
+                      placeholder={t.placeholderMessage}
                     />
                   </div>
 
@@ -276,7 +283,7 @@ export const ContactForm: React.FC = () => {
                         className="w-4 h-4 bg-surface-overlay border border-border-hairline rounded focus:ring-0 text-accent-gold focus:outline-none cursor-pointer"
                       />
                       <span className="text-[10px] text-text-muted font-body leading-tight">
-                        I consent to PT Dieng Ventura Holdings securely compiling my credentials for partnership evaluation under our privacy policies. *
+                        {t.consentText}
                       </span>
                     </label>
                     {errors.consent && <p className="text-[9px] text-red-400 mt-1">{errors.consent}</p>}
@@ -289,7 +296,7 @@ export const ContactForm: React.FC = () => {
                       className="w-full font-semibold"
                       disabled={status === "submitting"}
                     >
-                      {status === "submitting" ? "Transmitting..." : "Send Investor Inquiry"}
+                      {status === "submitting" ? (lang === "id" ? "Mengirimkan..." : "Transmitting...") : t.btnSubmit}
                     </Button>
                   </div>
                 </form>

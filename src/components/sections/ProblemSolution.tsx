@@ -1,10 +1,16 @@
 "use client";
 
 import React from "react";
-import { problemSolution } from "@/data/site";
 import { WarningCircle, CheckCircle } from "@phosphor-icons/react";
+import { translations } from "@/data/translations";
 
-export const ProblemSolution: React.FC = () => {
+interface ProblemSolutionProps {
+  lang: "id" | "en";
+}
+
+export const ProblemSolution: React.FC<ProblemSolutionProps> = ({ lang }) => {
+  const t = translations[lang].probSol;
+
   return (
     <section className="py-24 bg-primary relative border-b border-border-hairline overflow-hidden">
       {/* Decorative vertical lines */}
@@ -14,13 +20,13 @@ export const ProblemSolution: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-            Market Opportunity
+            {t.tag}
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-4">
-            Bridging the Value Gap
+            {t.title}
           </h2>
           <p className="text-sm text-text-muted">
-            Analyzing the fragmentation of highland tourism in Indonesia and our integrated solution.
+            {t.subtitle}
           </p>
         </div>
 
@@ -38,16 +44,16 @@ export const ProblemSolution: React.FC = () => {
               </div>
               <div>
                 <span className="text-[10px] text-red-400 font-display font-semibold uppercase tracking-wider block">
-                  {problemSolution.problem.title}
+                  {t.problem.title}
                 </span>
                 <h3 className="font-display font-bold text-xl text-off-white">
-                  {problemSolution.problem.subtitle}
+                  {t.problem.subtitle}
                 </h3>
               </div>
             </div>
 
             <ul className="space-y-4 flex-grow">
-              {problemSolution.problem.points.map((point, index) => (
+              {t.problem.points.map((point, index) => (
                 <li key={index} className="flex items-start space-x-3 text-xs leading-relaxed text-text-muted">
                   <span className="text-red-400 mt-1.5">•</span>
                   <span>{point}</span>
@@ -57,7 +63,7 @@ export const ProblemSolution: React.FC = () => {
             
             <div className="mt-8 pt-6 border-t border-border-hairline text-center">
               <span className="text-[10px] uppercase font-display font-bold tracking-widest text-red-400/80">
-                Missed Economic Value & Customer Stay Time
+                {t.missedValue}
               </span>
             </div>
           </div>
@@ -75,16 +81,16 @@ export const ProblemSolution: React.FC = () => {
               </div>
               <div>
                 <span className="text-[10px] text-accent-gold font-display font-semibold uppercase tracking-wider block">
-                  {problemSolution.solution.title}
+                  {t.solution.title}
                 </span>
                 <h3 className="font-display font-bold text-xl text-off-white">
-                  {problemSolution.solution.subtitle}
+                  {t.solution.subtitle}
                 </h3>
               </div>
             </div>
 
             <ul className="space-y-4 flex-grow">
-              {problemSolution.solution.points.map((point, index) => (
+              {t.solution.points.map((point, index) => (
                 <li key={index} className="flex items-start space-x-3 text-xs leading-relaxed text-off-white/80">
                   <span className="text-accent-gold mt-1.5">•</span>
                   <span>{point}</span>
@@ -94,7 +100,7 @@ export const ProblemSolution: React.FC = () => {
 
             <div className="mt-8 pt-6 border-t border-border-hairline text-center">
               <span className="text-[10px] uppercase font-display font-bold tracking-widest text-accent-gold">
-                Optimized Revenue Streams & Local Growth
+                {t.optimizedValue}
               </span>
             </div>
           </div>

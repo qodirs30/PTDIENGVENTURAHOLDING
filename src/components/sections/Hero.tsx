@@ -3,10 +3,20 @@
 import React from "react";
 import { Button } from "../ui/Button";
 import { siteConfig } from "@/data/site";
+import { translations } from "@/data/translations";
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  lang: "id" | "en";
+}
+
+export const Hero: React.FC<HeroProps> = ({ lang }) => {
+  const t = translations[lang].hero;
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-primary border-b border-border-hairline">
+    <section
+      id="vision"
+      className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-primary border-b border-border-hairline"
+    >
       {/* Premium ambient light background (Atmosphere-Background style) */}
       <div className="absolute inset-0 z-0">
         {/* Real photo background with green/dark overlay */}
@@ -35,22 +45,21 @@ export const Hero: React.FC = () => {
         <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded bg-surface-card/80 border border-border-hairline backdrop-blur-sm mb-8 animate-pulse-slow">
           <div className="w-1.5 h-1.5 rounded-full bg-accent-gold" />
           <span className="text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase">
-            {siteConfig.trustLabel}
+            {t.eyebrow}
           </span>
         </div>
 
         {/* H1 Heading */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-off-white mb-6 leading-[1.1]">
-          Building an Integrated{" "}
+          {t.title}{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold via-forest-light to-accent-gold bg-[size:200%] animate-pulse-slow">
-            Tourism, Nature & Investment
-          </span>{" "}
-          Ecosystem
+            {t.titleHighlight}
+          </span>
         </h1>
 
         {/* Support Paragraph */}
         <p className="text-sm sm:text-lg text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed font-body">
-          PT Dieng Ventura Holdings develops interconnected tourism assets, brands, projects, and business units designed to create long-term economic value while strengthening local communities and protecting nature.
+          {t.subtitle}
         </p>
 
         {/* CTA Actions */}
@@ -59,11 +68,11 @@ export const Hero: React.FC = () => {
             variant="primary"
             size="lg"
             onClick={() => {
-              const el = document.getElementById("thesis");
+              const el = document.getElementById("investment-thesis");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Explore the Opportunity
+            {t.ctaExplore}
           </Button>
           <Button
             variant="outline"
@@ -73,14 +82,14 @@ export const Hero: React.FC = () => {
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            View Investor Materials
+            {t.ctaMaterials}
           </Button>
         </div>
       </div>
       
       {/* Down arrow marker */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 opacity-50 z-20">
-        <span className="text-[9px] uppercase tracking-widest text-text-muted">Scroll</span>
+        <span className="text-[9px] uppercase tracking-widest text-text-muted">{t.scroll}</span>
         <div className="w-[1px] h-8 bg-gradient-to-b from-text-muted to-transparent" />
       </div>
     </section>

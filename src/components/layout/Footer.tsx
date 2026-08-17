@@ -1,8 +1,14 @@
 import React from "react";
 import { siteConfig } from "@/data/site";
+import { translations } from "@/data/translations";
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  lang: "id" | "en";
+}
+
+export const Footer: React.FC<FooterProps> = ({ lang }) => {
   const currentYear = new Date().getFullYear();
+  const t = translations[lang];
 
   return (
     <footer className="bg-primary border-t border-border-hairline py-12 relative overflow-hidden">
@@ -24,34 +30,36 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-text-muted max-w-sm mb-6 leading-relaxed">
-              PT Dieng Ventura Holdings develops interconnected tourism assets, brands, and ecosystems designed to create long-term value, strengthen local communities, and conserve nature in Central Java.
+              {lang === "id"
+                ? "PT Dieng Ventura Holdings mengembangkan aset pariwisata terpadu, merek, dan ekosistem pariwisata untuk menciptakan nilai jangka panjang, memperkuat komunitas lokal, serta melestarikan alam di Jawa Tengah."
+                : "PT Dieng Ventura Holdings develops interconnected tourism assets, brands, and ecosystems designed to create long-term value, strengthen local communities, and conserve nature in Central Java."}
             </p>
           </div>
 
           {/* Quick links */}
           <div>
             <h4 className="font-display text-xs uppercase tracking-widest text-accent-gold mb-4 font-semibold">
-              Ecosystem
+              {t.nav.ecosystem}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="#vision" className="text-text-muted hover:text-off-white transition-colors duration-300">
-                  Vision
+                  {t.nav.vision}
                 </a>
               </li>
               <li>
                 <a href="#ecosystem" className="text-text-muted hover:text-off-white transition-colors duration-300">
-                  Product Ecosystem
+                  {t.nav.ecosystem}
                 </a>
               </li>
               <li>
                 <a href="#flagship" className="text-text-muted hover:text-off-white transition-colors duration-300">
-                  Flagship Destination
+                  {t.nav.projects}
                 </a>
               </li>
               <li>
                 <a href="#roadmap" className="text-text-muted hover:text-off-white transition-colors duration-300">
-                  Roadmap
+                  {lang === "id" ? "Roadmap Pengembangan" : "Roadmap"}
                 </a>
               </li>
             </ul>
@@ -60,7 +68,7 @@ export const Footer: React.FC = () => {
           {/* Contact info */}
           <div>
             <h4 className="font-display text-xs uppercase tracking-widest text-accent-gold mb-4 font-semibold">
-              Contact
+              {lang === "id" ? "Kontak" : "Contact"}
             </h4>
             <address className="not-italic text-xs text-text-muted space-y-2">
               <p>{siteConfig.contact.address}</p>
@@ -95,16 +103,16 @@ export const Footer: React.FC = () => {
 
         {/* Subfooter */}
         <div className="flex flex-col md:flex-row items-center justify-between text-[11px] text-text-muted">
-          <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
+          <p>© {currentYear} {siteConfig.name}. {lang === "id" ? "Hak cipta dilindungi." : "All rights reserved."}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#legal" className="hover:text-off-white transition-colors duration-300">
               Disclaimer
             </a>
             <a href="#legal" className="hover:text-off-white transition-colors duration-300">
-              Privacy Policy
+              {lang === "id" ? "Kebijakan Privasi" : "Privacy Policy"}
             </a>
             <a href="#legal" className="hover:text-off-white transition-colors duration-300">
-              Terms of Service
+              {lang === "id" ? "Ketentuan Layanan" : "Terms of Service"}
             </a>
           </div>
         </div>

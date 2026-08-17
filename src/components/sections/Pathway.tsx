@@ -1,8 +1,14 @@
 import React from "react";
-import { pathway } from "@/data/roadmap";
 import { Card } from "../ui/Card";
+import { translations } from "@/data/translations";
 
-export const Pathway: React.FC = () => {
+interface PathwayProps {
+  lang: "id" | "en";
+}
+
+export const Pathway: React.FC<PathwayProps> = ({ lang }) => {
+  const t = translations[lang].pathway;
+
   return (
     <section className="py-24 bg-primary relative border-b border-border-hairline overflow-hidden">
       {/* Atmosphere decorations */}
@@ -11,19 +17,19 @@ export const Pathway: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded bg-forest-green/20 border border-forest-light/30 text-[10px] tracking-widest font-semibold font-display text-accent-gold uppercase mb-4">
-            Partnership Process
+            {t.tag}
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-off-white mb-4">
-            Investor Pathway
+            {t.title}
           </h2>
           <p className="text-sm text-text-muted">
-            Our structured onboarding route ensures complete transparency and secure due diligence for our strategic partners.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Pathway Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pathway.map((step) => (
+          {t.steps.map((step) => (
             <Card
               key={step.step}
               variant="interactive"
@@ -37,7 +43,7 @@ export const Pathway: React.FC = () => {
                   </span>
                   <div className="h-[1px] flex-grow bg-border-hairline/60 mx-4" />
                   <span className="text-[8px] font-display font-semibold uppercase px-2 py-0.5 rounded bg-surface-overlay text-text-muted border border-border-hairline">
-                    Stage {step.step}
+                    {t.stage} {step.step}
                   </span>
                 </div>
                 
