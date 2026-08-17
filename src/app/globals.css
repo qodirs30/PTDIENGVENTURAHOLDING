@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0a0f0d;
+  --color-surface-card: #121815;
+  --color-surface-overlay: #18221c;
+  --color-forest-green: #113622;
+  --color-forest-light: #1b5235;
+  --color-forest-glow: #246e47;
+  --color-accent-gold: #d4af37;
+  --color-accent-gold-hover: #e5be48;
+  --color-off-white: #f3f4f3;
+  --color-text-muted: #a3a8a5;
+  --color-border-hairline: rgba(255, 255, 255, 0.08);
+  --color-border-hairline-active: rgba(212, 175, 55, 0.3);
+
+  --font-display: var(--font-outfit);
+  --font-body: var(--font-plus-jakarta);
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-primary);
+    color: var(--color-off-white);
+    font-family: var(--font-body), sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism Styles */
+  .glass-card {
+    background: rgba(18, 24, 21, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-hairline);
+  }
+
+  .glass-card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-card-hover:hover {
+    background: rgba(18, 24, 21, 0.8);
+    border-color: var(--color-border-hairline-active);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
+
+  /* Grid Guide Lines */
+  .hairline-grid-h {
+    background-image: linear-gradient(to right, var(--color-border-hairline) 50%, transparent 50%);
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    height: 1px;
+    width: 100%;
+  }
+
+  .hairline-grid-v {
+    background-image: linear-gradient(to bottom, var(--color-border-hairline) 50%, transparent 50%);
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+    width: 1px;
+    height: 100%;
+  }
+
+  /* Hide Scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Keyframes for Float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
