@@ -1,0 +1,39 @@
+- [x] Project Setup
+    - [x] Rename README.md to README.md.orig
+    - [x] Run create-next-app with typescript, tailwind, eslint, app router, src dir
+    - [x] Restore/merge README.md
+    - [x] Verify node modules and run npm run dev
+- [x] Theme and Global Styling
+    - [x] Configure Tailwind config / globals.css with theme tokens (Forest green, gold, charcoal, off-white, fonts)
+    - [x] Define shared classes (glassmorphic, hairline grids, brackets)
+- [x] Data Architecture
+    - [x] Create site configuration files under src/data/ (site.ts, products.ts, roadmap.ts, pathway.ts)
+    - [x] Create comprehensive translation database (translations.ts) supporting Indonesian and English
+- [x] Base Layout and UI Primitives
+    - [x] Create Header/Navbar component (mobile responsive, glassmorphic, translated navigation labels)
+    - [x] Create Footer component with disclaimers
+    - [x] Create reusable UI components (Buttons, Cards, Badge)
+- [x] Page Sections Implementation
+    - [x] Section 1: Hero (cinematic, trust label, misty volcano background, fixed scroll ID)
+    - [x] Section 2: Thesis (4-6 premium cards, fixed scroll ID)
+    - [x] Section 3: Problem/Solution (fragmented vs integrated)
+    - [x] Section 4: Holding Architecture (Ecosystem flow / interactive nodes diagram)
+    - [x] Section 5: Ecosystem & Product Portfolio (10 products grid, dynamic ID/EN filtering)
+    - [x] Section 6: Flagship Project - Karangsari Forest Park (misty forest background)
+    - [x] Section 7: Business Model & Revenue Streams
+    - [x] Section 8: Growth Roadmap (Timeline phases)
+    - [x] Section 9: Financial highlights ("Model in Validation" placeholder + legal disclaimer)
+    - [x] Section 10: Investor Pathway (Discover to Closing)
+    - [x] Section 11: Data Room CTA (Secure-looking mock passcode gate)
+    - [x] Section 12: Investor Inquiry Form (Validated fields, consent, error/success feedback)
+- [x] SEO, Performance & Compliance
+    - [x] Set up Metadata, Open Graph tags, sitemap.xml, robots.txt, JSON-LD schemas
+    - [x] Ensure WCAG 2.2 AA accessibility (alt text, keyboard navigation, focus indicator)
+- [x] UX and Localization Enhancements
+    - [x] Add ID/EN language toggle buttons on Header (desktop and mobile drawer)
+    - [x] Implement inline-expanding level details on mobile in Holding Company Architecture section
+    - [x] Rectify duplicate section IDs (#ecosystem) and add missing anchors (#vision, #investment-thesis)
+- [x] Final Verification
+    - [x] Build and Lint check
+    - [x] Create Walkthrough artifact
+    - [x] Push commits to GitHub repository (fixed http.postBuffer limits)

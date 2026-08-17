@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
             className="h-8 w-auto object-contain"
           />
           <span className="font-display font-bold tracking-widest text-sm text-off-white group-hover:text-accent-gold transition-colors duration-300">
-            DIENG VENTURA
+            DIENG VENTURA HOLDINGS
           </span>
         </a>
 

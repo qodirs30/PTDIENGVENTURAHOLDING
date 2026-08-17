@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
                 className="h-6 w-auto object-contain"
               />
               <span className="font-display font-bold tracking-widest text-xs text-off-white">
-                DIENG VENTURA
+                DIENG VENTURA HOLDINGS
               </span>
             </div>
             <p className="text-xs text-text-muted max-w-sm mb-6 leading-relaxed">
